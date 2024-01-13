@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+</head>
+
+    <h1>
+    Client 3️⃣
+    </h1>
+    <input type="text" id="chat" placeholder="Enter your message">
+     <input type="text" id="phone" placeholder="Enter receiver PhoneNumber">
+
+    <button onclick="sendMessage()">Send Message</button>
+<h1>Messages</h1>
+    <ul id="myList">
+</ul>
+ 
+</body>
+
+<script>
+
+     function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Check if this cookie starts with the name we are looking for
+            if (cookie.startsWith(name + '=')) {
+                // Extract and return the cookie value
+                return cookie.substring(name.length + 1);
+            }
+        }
+        // Return null if the cookie is not found
+        return null;
+    }
+
+    // Read the value of the "jwtoken" cookie
+    const jwtokenValue = getCookie('jwtoken');
+
+    const authToken =jwtokenValue;
+    const socket=new WebSocket(`ws://localhost:8080?authorization=${authToken}&phoneNumber=9284685426`,"echo-protocol");
+    //connection openeda
+    socket.addEventListener('open',function(event){
+        socket.send('Hello World!');
+    });
+
+    //Listen for messages
+    socket.addEventListener('message',function(event){
+        console.log('Message from server',event);
+        const li=document.createElement('li');
+        li.appendChild(document.createTextNode(event.data));
+        document.getElementById('myList').appendChild(li);
+    });
+
+    const sendMessage=async()=>{
+        const message=document.getElementById('chat').value;
+        const receiver=document.getElementById('phone').value;
+        // send a post request to /send with a message
+        const response=await fetch('/api/sendMessage',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                Authorization:authToken,
+            },
+            body:JSON.stringify({
+                message,
+                receiver
+            })
+        });
+        console.log(response.status);
+        // socket.send(message);
+    }   
+</script>
+</html>

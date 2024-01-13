@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+
+    <form id="loginForm">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+        <button type="button" onclick="sendOTP()">Send OTP</button>
+
+        <div id="otpSection" style="display: none;">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+
+            <button type="button" onclick="verifyOTP()">Verify OTP</button>
+        </div>
+                <div id="response"></div>
+                        <a href="/user">Message</a>
+
+
+    </form>
+
+    <script>
+        function sendOTP() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            // Make a fetch request to your server's /api/sendotp route
+            fetch('/api/sendloginOtp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response from server (e.g., show success message)
+                console.log(data);
+                
+                // Display OTP input section
+                document.getElementById('otpSection').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('otp').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            // Make a fetch request to your server's /api/verifyotp route
+            fetch('/api/verifyloginOtp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber,otp }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response from server (e.g., show success message)
+                console.log(data);
+                                document.getElementById('response').innerHTML = JSON.stringify(data);
+
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
