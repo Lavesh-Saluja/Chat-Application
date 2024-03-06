@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({path:'./config.env'});
 const port = process.env.PORT;
 const server = app.listen(port, '0.0.0.0',() => console.log(`Listening on port ${port}`));
 const configureSockets = require('./websocket');
