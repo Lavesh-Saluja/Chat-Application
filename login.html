@@ -60,6 +60,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ phoneNumber,otp }),
+                withCredentials: true
             })
             .then(response => response.json())
             .then(data => {

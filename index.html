@@ -19,6 +19,9 @@
 
 <script>
     function getCookie(name) {
+        console.log('------------------------------------');
+        console.log(document.cookie);
+        console.log('------------------------------------');
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();

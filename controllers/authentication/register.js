@@ -37,13 +37,12 @@ const verifyOtp = async (req, res) => {
         }
         console.log(userExist);
         const token = await userExist.generateAuthToken();
+        console.log("token:"+token);
         res.cookie("jwtoken", token, {
             expires:new Date('9999-12-31T23:59:59Z'),
             // httpOnly: true,
             sameSite: "none" ,
             secure: true,
-             SameSite:"None" ,
-            secure: true, 
         });
         res.status(201).json({ message: "User logged in successfully"});
     } catch (err) {
