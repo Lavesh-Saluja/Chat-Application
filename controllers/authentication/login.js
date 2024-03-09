@@ -37,14 +37,15 @@ const verifyOtp=async (req, res) => {
             return res.status(422).json({ error: "Invalid OTP" });
         }
         const token = await userExist.generateAuthToken(req, res);
-        console.log(token+"-------");
-        res.cookie("token", token, {
-            expires: new Date('9999-12-31T23:59:59Z'),
-            // httpOnly: true,
-            sameSite:"none",
-            secure: true,
+        console.log(token + "-------");
+        res.setHeader('Set-Cookie', `token=${token}; SameSite=None;Secure`);
+        // res.cookie("token", token, {
+        //     expires: new Date('9999-12-31T23:59:59Z'),
+        //     // httpOnly: true,
+        //     sameSite:"none",
+        //     secure: true,
            
-        });
+        // });
         res.status(201).json({ message: "User logged in successfully" });
     } catch (err) {
         console.log(err);
