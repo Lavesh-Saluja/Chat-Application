@@ -19,9 +19,7 @@
 
 <script>
     function getCookie(name) {
-        console.log('------------------------------------');
-        console.log(document.cookie);
-        console.log('------------------------------------');
+        
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
@@ -36,7 +34,7 @@
     }
 
     // Read the value of the "jwtoken" cookie
-    const authToken = getCookie('jwtoken');
+    const authToken = getCookie('token');
 
 
     const socket=new WebSocket(`ws://localhost:8000?authorization=${authToken}`,"echo-protocol");

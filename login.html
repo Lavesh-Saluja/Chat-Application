@@ -60,13 +60,16 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ phoneNumber,otp }),
-                withCredentials: true
+                
             })
             .then(response => response.json())
             .then(data => {
                 // Handle response from server (e.g., show success message)
                 console.log(data);
                                 document.getElementById('response').innerHTML = JSON.stringify(data);
+                                console.log('-------------llll-----------------------');
+        console.log(document.cookie);
+        console.log('--------------------------lllll----------');
 
             })
             .catch(error => console.error('Error:', error));
