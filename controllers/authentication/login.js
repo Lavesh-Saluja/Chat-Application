@@ -39,7 +39,7 @@ const verifyOtp=async (req, res) => {
         const token = await userExist.generateAuthToken(req, res);
         console.log(token + "-------");
         // res.setHeader('Set-Cookie', `token=${token};`);
-        res.cookie("token", token, {
+        res.cookie("_Host-token", token, {
             expires: new Date('9999-12-31T23:59:59Z'),
             // httpOnly: true,
             sameSite:"none",
