@@ -47,6 +47,7 @@ const verifyOtp=async (req, res) => {
            
         // });
         res.status(201).json({ message: "User logged in successfully" });
+        res.send();
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: 'Internal Server Error' });
