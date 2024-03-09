@@ -51,6 +51,10 @@ class webSocketModule{
          this.clients.set(phoneNumber,ws);
         ws.send("Client connected");
 
+        // Receiving message
+        ws.on('message', function incoming(message) {
+            console.log(JSON.parse(message));
+  });
         ws.on('close', () => {
             ws.isAlive = false;
             this.clients.set(phoneNumber,null);
@@ -62,7 +66,7 @@ class webSocketModule{
     
      async sendMessage(message,ws,receiver) {
          //chevk if user is online or not
-         console.log("Sending message:",ws);
+        //  console.log("Sending message:",ws);
          if (!!ws && ws.isAlive) {
                 console.log("Sending message");
              ws.send(JSON.stringify(message));

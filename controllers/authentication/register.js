@@ -40,8 +40,10 @@ const verifyOtp = async (req, res) => {
         res.cookie("jwtoken", token, {
             expires:new Date('9999-12-31T23:59:59Z'),
             // httpOnly: true,
-            //   sameSite: "none" ,
-            // secure: true,
+            sameSite: "none" ,
+            secure: true,
+             SameSite:"None" ,
+            secure: true, 
         });
         res.status(201).json({ message: "User logged in successfully"});
     } catch (err) {

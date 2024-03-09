@@ -9,13 +9,13 @@ const sendMessage = async (req, res) => {
                 const msg=messageSchema(message,req.rootUser.phoneNumber,receiver,Date.now());
          console.log("Send Message", message, receiver);
         const user = await User.findOne({ phoneNumber: receiver });
-        console.log("User", user);
+        // console.log("User", user);
         if (!user) {
             console.log("User Does not exist")
             return res.status(404).send("User Does not exist");
         }
         const wsObject = getWebSocketModule();
-        console.log("wsObject", wsObject);
+        // console.log("wsObject", wsObject);
         const ws = wsObject.clients.get(receiver);
     const response = await wsObject.sendMessage(msg, ws, receiver);
         return res.status(200).json({ success:response, message: "Message sent" });

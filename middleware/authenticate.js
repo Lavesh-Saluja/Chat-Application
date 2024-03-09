@@ -4,7 +4,7 @@ const User = require("../models/userSchema");
 const authenticateUser = async (req, res, next) => {
     try {
         console.log("Authenticate");
-        console.log(req.headers);
+        // console.log(req.headers);
         const token = req.header('Authorization');
         
         if (!token) {

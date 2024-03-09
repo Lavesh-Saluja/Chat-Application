@@ -36,12 +36,12 @@
     const authToken = getCookie('jwtoken');
 
 
-    const socket=new WebSocket(`ws://localhost:5000?authorization=${authToken}`,"echo-protocol");
+    const socket=new WebSocket(`ws://localhost:8000?authorization=${authToken}`,"echo-protocol");
 
     //connection openeda
-    socket.addEventListener('open',function(event){
-        socket.send('Hello World!');
-    });
+    // socket.addEventListener('open',function(event){
+    //     socket.send('Hello World!');
+    // });
 
     //Listen for messages
     socket.addEventListener('message',function(event){
@@ -54,26 +54,28 @@
 
   
     const sendMessage=async()=>{
-        console.log("KKKKKKKKKKK")
+        // console.log("KKKKKKKKKKK")
         const message=document.getElementById('chat').value;
         const receiver=document.getElementById('phone').value;
-        // send a post request to /send with a message
-        console.log('------------------------------------');
-        console.log(message,receiver);
-        console.log('------------------------------------');
-        const response=await fetch('/api/sendMessage',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                Authorization:authToken,
-            },
-            body:JSON.stringify({
-                message,
-                receiver
-            })
-        });
-        console.log(response);
-        // socket.send(message);
+        // // send a post request to /send with a message
+        // console.log('------------------------------------');
+        // console.log(message,receiver);
+        // console.log('------------------------------------');
+        // const response=await fetch('/api/sendMessage',{
+        //     method:'POST',
+        //     headers:{
+        //         'Content-Type':'application/json',
+        //         Authorization:authToken,
+        //     },
+        //     body:JSON.stringify({
+        //         message,
+        //         receiver
+        //     })
+        // });
+        // console.log(response);
+        socket.send(JSON.stringify({message,receiver}));
+
+
     }   
 </script>
 </html>
