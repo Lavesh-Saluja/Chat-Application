@@ -18,7 +18,7 @@ const otp = async (req, res) => {
         userExist.otpExpiration = otpExpiration;
         await userExist.save();
         //send otp using twillo or any other service
-        await sendOtp(phoneNumber, otp);
+        // await sendOtp(phoneNumber, otp);
         res.status(201).json({ message: "Otp sent Successfully" });
     } catch (err) {
         console.log(err);
@@ -26,7 +26,8 @@ const otp = async (req, res) => {
     }
 }
 
-const verifyOtp=async (req, res) => {
+const verifyOtp = async (req, res) => {
+    console.log("verifyOtp");
     const { phoneNumber, otp } = req.body;
     if (!phoneNumber || !otp) {
         return res.status(422).json({ error: "Please fill all the fields" });
@@ -39,11 +40,11 @@ const verifyOtp=async (req, res) => {
         const token = await userExist.generateAuthToken(req, res);
         console.log(token + "-------");
         // res.setHeader('Set-Cookie', `token=${token};`);
-        res.cookie("_Host-token", token, {
+        res.cookie("token", token, {
             expires: new Date('9999-12-31T23:59:59Z'),
             // httpOnly: true,
-            sameSite:"none",
-            secure: true,
+            // sameSite:"none",
+            // secure: true,
            
         });
         res.status(201).json({ message: "User logged in successfully" });
@@ -54,4 +55,4 @@ const verifyOtp=async (req, res) => {
     }
 }
 
-module.exports = { otp, verifyOtp};
+module.exports = {otp,verifyOtp};
