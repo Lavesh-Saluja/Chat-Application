@@ -31,7 +31,7 @@
             const phoneNumber = document.getElementById('phoneNumber').value;
 
             // Make a fetch request to your server's /api/sendotp route
-            fetch('https://d2jhz1oj0skp5h.cloudfront.net/api/sendloginOtp', {
+            fetch('/api/sendloginOtp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +54,7 @@
             const phoneNumber = document.getElementById('phoneNumber').value;
 
             // Make a fetch request to your server's /api/verifyotp route
-            fetch('https://d2jhz1oj0skp5h.cloudfront.net/api/verifyloginOtp', {
+            fetch('/api/verifyloginOtp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
