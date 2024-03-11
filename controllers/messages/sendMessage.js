@@ -3,6 +3,9 @@ const getWebSocketModule = require("../../websocket/webSocketModule");
 const messageSchema = require("../../messageFormat/message");
 
 const sendMessage = async (req, res) => {
+    console.log('------------------------------------');
+    console.log("klkl");
+    console.log('------------------------------------');
       console.log("Body",req.body);
     try {
         const { message, receiver } = req.body;
@@ -15,7 +18,7 @@ const sendMessage = async (req, res) => {
             return res.status(404).send("User Does not exist");
         }
         const wsObject = getWebSocketModule();
-        // console.log("wsObject", wsObject);
+        console.log("wsObject", wsObject);
         const ws = wsObject.clients.get(receiver);
     const response = await wsObject.sendMessage(msg, ws, receiver);
         return res.status(200).json({ success:response, message: "Message sent" });

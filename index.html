@@ -58,23 +58,23 @@
         // console.log("KKKKKKKKKKK")
         const message=document.getElementById('chat').value;
         const receiver=document.getElementById('phone').value;
-        // // send a post request to /send with a message
-        // console.log('------------------------------------');
-        // console.log(message,receiver);
-        // console.log('------------------------------------');
-        // const response=await fetch('/api/sendMessage',{
-        //     method:'POST',
-        //     headers:{
-        //         'Content-Type':'application/json',
-        //         Authorization:authToken,
-        //     },
-        //     body:JSON.stringify({
-        //         message,
-        //         receiver
-        //     })
-        // });
-        // console.log(response);
-        socket.send(JSON.stringify({message,receiver}));
+        // send a post request to /send with a message
+        console.log('------------------------------------');
+        console.log(message,receiver);
+        console.log('------------------------------------');
+        const response=await fetch('/api/sendMessage',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                Authorization:authToken,
+            },
+            body:JSON.stringify({
+                message,
+                receiver
+            })
+        });
+        console.log(response);
+        // socket.send(JSON.stringify({message,receiver}));
 
 
     }   
