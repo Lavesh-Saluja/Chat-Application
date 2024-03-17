@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  web : 
+    image: coderlavesh/chat-application:latest
+    ports:      
+      - "8000:8000"
+
