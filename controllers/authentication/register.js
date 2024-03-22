@@ -3,20 +3,25 @@ const sendOtp = require('../../utils/otp/sendOtp');
 const generateOtp=require('../../utils/otp/generateOtp'); 
 const otp = async (req, res) => {
     const { phoneNumber } = req.body;
+   
     if (!phoneNumber ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
     try {
         const userExist = await User.findOne({ phoneNumber: phoneNumber });
+        
+        console.log("PPPP====",userExist);
         if (userExist) {
             return res.status(422).json({ error: "User already exists" });
         }
+             
+
         const otp = generateOtp();
         const otpExpiration = new Date(Date.now() + 10 * 60 * 1000); 
         const user=new User({phoneNumber,otp,otpExpiration});
         await user.save();
         //send otp using twillo or any other service
-        await sendOtp(phoneNumber, otp);
+        // await sendOtp(phoneNumber, otp);
         res.status(201).json({ message: "OTP sent successfully" });
     } catch (err) {
         console.log(err);
