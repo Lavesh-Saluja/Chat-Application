@@ -1,6 +1,8 @@
 const User = require("../../models/userSchema");
 const getWebSocketModule = require("../../websocket/webSocketModule");
 const messageSchema = require("../../messageFormat/message");
+const { v4: uuidv4 } = require('uuid');
+
 
 const sendMessage = async (req, res) => {
     console.log('------------------------------------');
@@ -9,7 +11,8 @@ const sendMessage = async (req, res) => {
       console.log("Body",req.body);
     try {
         const { message, receiver } = req.body;
-                const msg=messageSchema(message,req.rootUser.phoneNumber,receiver,Date.now());
+        const id = uuidv4(); 
+                const msg=messageSchema(id,message,req.rootUser.phoneNumber,receiver,Date.now());
          console.log("Send Message", message, receiver);
         const user = await User.findOne({ phoneNumber: receiver });
         // console.log("User", user);

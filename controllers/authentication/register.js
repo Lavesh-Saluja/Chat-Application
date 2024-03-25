@@ -9,8 +9,6 @@ const otp = async (req, res) => {
     }
     try {
         const userExist = await User.findOne({ phoneNumber: phoneNumber });
-        
-        console.log("PPPP====",userExist);
         if (userExist) {
             return res.status(422).json({ error: "User already exists" });
         }

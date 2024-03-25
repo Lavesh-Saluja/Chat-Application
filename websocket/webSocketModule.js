@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/userSchema");
 const messageQueue=require("../messagingQueue/index");
 const readMessages=require("../messagingQueue/readMessage");
-
+const cookieParser = require('cookie-parser');
 class webSocketModule{
     constructor() {
         this.wss = new WebSocket.Server({ noServer: true })
@@ -13,7 +13,9 @@ class webSocketModule{
     async authorizeAndConnect(server) {
         const wss = getWebSocketModule().wss;
         server.on('upgrade', async (req, socket, head) => {
-         console.log("Upgrade");
+            console.log("Upgrade");
+            
+            
         // socket.on('error', onSocketPreError);
          //verify cookie sent in authorization headers using jwt
     try {
@@ -23,8 +25,11 @@ class webSocketModule{
 
 
         const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-        const rootUser = await User.findOne({ _id: verifyToken._id, phoneNumber: verifyToken.phoneNumber,token });
+        console.log("User=",verifyToken);
+        const rootUser = await User.findOne({ _id: verifyToken._id });
+        
         let phoneNumber = verifyToken.phoneNumber;
+        console.log("User=",rootUser);
         if (!rootUser) {
              socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
                 socket.destroy();

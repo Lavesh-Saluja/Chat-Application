@@ -6,15 +6,15 @@ const authenticateUser = async (req, res, next) => {
         console.log("Authenticate");
         // console.log(req.headers);
         const token = req.header('Authorization');
-        
+    
         if (!token) {
             return res.status(401).send('Unauthorized: No token provided');
         }
-
+    
         const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-
-        const rootUser = await User.findOne({ _id: verifyToken._id, token });
-
+        
+        const rootUser = await User.findOne({ _id: verifyToken._id });
+        console.log(rootUser,"------");
         if (!rootUser) {
             throw new Error('User not found');
         }
