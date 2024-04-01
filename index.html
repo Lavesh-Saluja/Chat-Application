@@ -37,7 +37,7 @@
     const authToken = getCookie('token');
 
 
-    const socket=new WebSocket(`ws://localhost:8000?authorization=${authToken}`,"echo-protocol");
+    const socket=new WebSocket(`wss://chatapp.smpco.tech?authorization=${authToken}`,"echo-protocol");
 
     //connection openeda
     // socket.addEventListener('open',function(event){
