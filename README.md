@@ -14,7 +14,7 @@ Welcome to ChatApp, a user-friendly and innovative chat application that priorit
 
 - **Video Chatting:** Enhance your conversations with the upcoming video chat feature.
 - **Read/Sent Receipts:** Keep track of message status with read and sent receipt functionality.
-- **Frontend/Next.js**
+
 
 Feel free to explore the codebase and contribute to make ChatApp even better!
 
@@ -22,6 +22,7 @@ Feel free to explore the codebase and contribute to make ChatApp even better!
 
 
 - Backend: [Node.js](https://nodejs.org/), [Rabbit MQ](https://www.rabbitmq.com/), [Twilio API](https://www.twilio.com/docs/usage/api)
+- Frontend: Nextjs and IndexedDB [frontend](https://github.com/Lavesh-Saluja/Chat-application-client)
 - Real-time Communication: [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
 ## Feedback and Contributions
